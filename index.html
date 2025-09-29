@@ -5,18 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eze Chidebelu Daniel | Fullstack Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">DannyCharis</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
     <!-- Header Section -->
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="profile-img">
-                    <i class="fas fa-user"><img src="Grant.jpg" alt="" class="d-line"></i>
-                </div>
-                <h1>Eze Chidebelu Daniel</h1>
-                <p class="tagline">Junior Fullstack Developer</p>
+                <p class="greeting">Hi, my name is</p>
+                <h1>Eze Chidebelu Daniel.</h1>
+                <p class="tagline">I build things for the web.</p>
+                <p class="intro">I'm a junior fullstack developer specializing in building responsive, user-friendly applications using modern technologies. Currently focused on creating digital experiences that make a difference.</p>
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
@@ -32,8 +49,12 @@
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/in/dannycharis" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://dannycharis.github.io/portfolio" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/dannycharis" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://dannycharis.github.io/portfolio" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -49,7 +70,11 @@
                 <div class="about-text">
                     <p>Enthusiastic and motivated <span class="highlight">Junior Fullstack Developer</span> with a solid foundation in modern web development. Passionate about building responsive, user-friendly applications using <span class="highlight">JavaScript, React, Node.js, and Python</span>.</p>
                     <p>Combines a computer engineering background with practical experience in teaching complex technical concepts, demonstrating strong problem-solving abilities and a keen aptitude for learning new technologies quickly.</p>
-                    <p>Eager to contribute to a collaborative engineering team and deliver high-quality software.</p>
+                    <p>Eager to contribute to a collaborative engineering team and deliver high-quality software solutions that make a positive impact.</p>
+                </div>
+                <div class="profile-img">
+                    <img src="dannycharis-removebg.png" width="300" alt="">
+                    <!-- <i class="fas fa-user"></i> -->
                 </div>
             </div>
         </div>
@@ -214,10 +239,11 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer id="contact">
         <div class="container">
             <div class="footer-content">
                 <h2>Get In Touch</h2>
+                <p>I'm currently open to new opportunities and collaborations. Feel free to reach out if you'd like to connect!</p>
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
@@ -233,14 +259,47 @@
                     <a href="https://dannycharis.github.io/portfolio" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
                 <p class="references">References available upon request</p>
+                <p class="copyright">© 2023 Eze Chidebelu Daniel. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple animation for skill items on scroll
-        const skillItems = document.querySelectorAll('.skill-item');
-        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '15px 0';
+                nav.style.boxShadow = '0 10px 30px -10px rgba(2, 12, 27, 0.7)';
+            } else {
+                nav.style.padding = '20px 0';
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation for elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -248,13 +307,15 @@
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, { threshold: 0.1 });
-        
-        skillItems.forEach(item => {
-            item.style.opacity = 0;
-            item.style.transform = 'translateY(20px)';
-            item.style.transition = 'opacity 0.5s, transform 0.5s';
-            observer.observe(item);
+        }, observerOptions);
+
+        // Observe elements for animation
+        const animateElements = document.querySelectorAll('.skill-category, .project-card, .timeline-content, .education-content');
+        animateElements.forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(el);
         });
     </script>
 </body>
